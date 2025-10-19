@@ -1,5 +1,5 @@
 from django.contrib.auth.models import User
-from django.db import models  # ✅ Use django.db.models, not djongo for now
+from django.db import models 
 
 class HotelRoom(models.Model):
     owner = models.ForeignKey(User, on_delete=models.CASCADE)
