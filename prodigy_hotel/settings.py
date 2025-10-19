@@ -1,15 +1,12 @@
 from pathlib import Path
 from datetime import timedelta
-
-# ✅ Base Directory Path
+
 BASE_DIR = Path(__file__).resolve().parent.parent
-
-# ✅ SECURITY
+
 SECRET_KEY = 'django-insecure-change-this-key'
 DEBUG = True
 ALLOWED_HOSTS = []
-
-# ✅ Installed Apps
+
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -21,7 +18,7 @@ INSTALLED_APPS = [
     'bookings',
 ]
 
-# ✅ Middleware
+
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -34,7 +31,7 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'prodigy_hotel.urls'
 
-# ✅ Templates
+
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
@@ -52,16 +49,14 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'prodigy_hotel.wsgi.application'
-
-# ✅ Database (SQLite)
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
-
-# ✅ Password Validation
+
 AUTH_PASSWORD_VALIDATORS = [
     {
         'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
@@ -77,8 +72,7 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-# ✅ Internationalization
-LANGUAGE_CODE = 'en-us'
+
 TIME_ZONE = 'UTC'
 USE_I18N = True
 USE_TZ = True
