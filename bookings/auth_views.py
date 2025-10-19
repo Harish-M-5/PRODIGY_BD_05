@@ -4,10 +4,7 @@ from rest_framework import status
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate
 from rest_framework_simplejwt.tokens import RefreshToken
-
-# -----------------------------
-# Register new user
-# -----------------------------
+
 class RegisterView(APIView):
     def post(self, request):
         username = request.data.get('username')
@@ -33,10 +30,7 @@ class RegisterView(APIView):
             {'message': 'User registered successfully'},
             status=status.HTTP_201_CREATED
         )
-
-# -----------------------------
-# Login user and get JWT token
-# -----------------------------
+
 class LoginView(APIView):
     def post(self, request):
         username = request.data.get('username')
@@ -56,7 +50,6 @@ class LoginView(APIView):
                 status=status.HTTP_401_UNAUTHORIZED
             )
 
-        # Generate JWT token
         refresh = RefreshToken.for_user(user)
         return Response({
             'refresh': str(refresh),
