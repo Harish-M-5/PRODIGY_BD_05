@@ -6,7 +6,7 @@ def home(request):
     return JsonResponse({"message": "Welcome to Prodigy Hotel Booking API"})
 
 urlpatterns = [
-    path('', home, name='home')
+    path('home/', name='home')
     path('admin/', admin.site.urls)
     path('api/', include('bookings.urls'))
 ]
