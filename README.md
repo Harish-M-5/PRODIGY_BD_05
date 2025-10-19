@@ -35,11 +35,23 @@ This project is part of the Prodigy Infotech Internship Tasks and demonstrates b
 
 # 🧰 Technologies Used
 Category	Tools
-Language	Python 
+
+
+Language	Python
+
+
 Framework	Django 
+
+
 Authentication	JWT 
+
+
 Database	SQLite3
+
+
 API Testing	Postman
+
+
 VS Code
 
 
