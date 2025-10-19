@@ -6,10 +6,7 @@ from .serializers import HotelRoomSerializer, BookingSerializer
 from .permissions import IsOwnerOrReadOnly
 from .utils import calculate_total_price
 from datetime import datetime
-
-# -----------------------------
-# Hotel Room CRUD
-# -----------------------------
+
 class HotelRoomViewSet(viewsets.ModelViewSet):
     queryset = HotelRoom.objects.all()
     serializer_class = HotelRoomSerializer
@@ -17,8 +14,7 @@ class HotelRoomViewSet(viewsets.ModelViewSet):
 
     def perform_create(self, serializer):
         serializer.save(owner=self.request.user)
-
-    # Filter rooms by availability dates
+
     @action(detail=False, methods=['get'], url_path='search')
     def search_rooms(self, request):
         check_in = request.query_params.get('check_in')
@@ -34,8 +30,7 @@ class HotelRoomViewSet(viewsets.ModelViewSet):
                 return Response(
                     {"error": "Invalid date format. Use YYYY-MM-DD"},
                     status=status.HTTP_400_BAD_REQUEST
-                )
-            # Exclude rooms already booked in this date range
+                )
             booked_rooms = Booking.objects.filter(
                 check_in__lt=check_out_date, check_out__gt=check_in_date
             ).values_list('room_id', flat=True)
@@ -44,10 +39,7 @@ class HotelRoomViewSet(viewsets.ModelViewSet):
         serializer = HotelRoomSerializer(rooms, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
 
-
-# -----------------------------
-# Room Booking
-# -----------------------------
+
 class BookingViewSet(viewsets.ModelViewSet):
     queryset = Booking.objects.all()
     serializer_class = BookingSerializer
@@ -57,8 +49,7 @@ class BookingViewSet(viewsets.ModelViewSet):
         room = serializer.validated_data['room']
         check_in = serializer.validated_data['check_in']
         check_out = serializer.validated_data['check_out']
-
-        # Check availability
+
         overlapping = Booking.objects.filter(
             room=room,
             check_in__lt=check_out,
@@ -67,12 +58,10 @@ class BookingViewSet(viewsets.ModelViewSet):
 
         if overlapping:
             raise serializers.ValidationError("Room is already booked for this date range.")
-
-        # Calculate total price
+
         total_price = calculate_total_price(room.price_per_night, check_in, check_out)
         serializer.save(user=self.request.user, total_price=total_price)
-
-    # Reserve room via custom action
+
     @action(detail=False, methods=['post'], url_path='reserve')
     def reserve_room(self, request):
         serializer = BookingSerializer(data=request.data)
