@@ -89,15 +89,31 @@ http://127.0.0.1:8000/
 
 
 # 🧩 API Endpoints
-Action	Method	Endpoint
+Action	Method	Endpoint:
+
+
 Register User	POST	/api/auth/register/
+
+
 Login User	POST	/api/auth/login/
+
+
 List Rooms	GET	/api/rooms/
+
+
 Create Room	POST	/api/rooms/
+
+
 Search Available Rooms	GET	/api/rooms/search/?check_in=YYYY-MM-DD&check_out=YYYY-MM-DD
+
+
 Reserve Room	POST	/api/bookings/reserve/
+
+
 View Bookings	GET	/api/bookings/
-🧪 Example JSON (Register)
+
+
+ Example JSON (Register)
 {
   "username": "harish",
   "email": "harish@example.com",
